@@ -21,7 +21,7 @@ import (
 	"github.com/unknwon/i18n"
 )
 
-var version = 232
+var version = 230
 
 var hosts = []string{"https://cursor.jeter.eu.org", "http://129.154.205.7:7193"}
 var host = hosts[0]
@@ -156,8 +156,7 @@ func Run() (productSelected string, modelIndexSelected int) {
 	periodIndex := 1
 	if expTime.Before(time.Now()) {
 		fmt.Printf(defaultColor, Trr.Tr("选择有效期："))
-		//jbPeriod := []string{"1" + Trr.Tr("年(购买)"), "2" + Trr.Tr("小时(免费)")}
-		jbPeriod := []string{"1" + Trr.Tr("年(购买)")}
+		jbPeriod := []string{"1" + Trr.Tr("年(购买)"), "2" + Trr.Tr("小时(免费)")}
 		for i, v := range jbPeriod {
 			fmt.Printf(hGreen, fmt.Sprintf("%d. %s\t", i+1, v))
 		}
@@ -171,11 +170,11 @@ func Run() (productSelected string, modelIndexSelected int) {
 		fmt.Println(Trr.Tr("选择的有效期为：") + jbPeriod[periodIndex-1])
 		fmt.Println()
 
-		//if periodIndex == 2 {
-		//	fmt.Printf(green, Trr.Tr("授权成功！使用过程请不要关闭此窗口"))
-		//	countDown(2 * 60 * 60)
-		//	return
-		//}
+		if periodIndex == 2 {
+			fmt.Printf(green, Trr.Tr("授权成功！使用过程请不要关闭此窗口"))
+			countDown(2 * 60 * 60)
+			return
+		}
 
 		payUrl, orderID := Cli.GetPayUrl()
 		isCopyText := ""

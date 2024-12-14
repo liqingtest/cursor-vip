@@ -18,11 +18,8 @@ func PKCS5UnPadding(origData []byte) []byte {
 	if length == 0 {
 		return origData
 	}
-	unPadding := int(origData[length-1])
-	if unPadding > length {
-		return origData // or handle the error appropriately
-	}
-	return origData[:(length - unPadding)]
+	unpadding := int(origData[length-1])
+	return origData[:(length - unpadding)]
 }
 
 func Encrypt(origData, key []byte) ([]byte, error) {
